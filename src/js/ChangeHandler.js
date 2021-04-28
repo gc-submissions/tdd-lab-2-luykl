@@ -6,8 +6,8 @@
 class ChangeHandler {
     
     constructor(amountDue) {
-        this.amountDue = null;
-        this.cashTendered = null;
+        this.amountDue = amountDue;
+        this.cashTendered = 0;
     }
 
     /**
