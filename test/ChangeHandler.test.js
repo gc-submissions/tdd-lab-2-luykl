@@ -70,6 +70,32 @@ describe("ChangeHandler", function() {
     expect(ch.cashTendered).toBe(42);  
   });
 
+  //PAYMENT
+  test("cashTendered > amountDue -> true", function() {
+    const ch = new ChangeHandler(15);
+    ch.insertCoin("dime");
+    ch.insertCoin("dime");
+    let result = ch.isPaymentSufficient();
+    expect(result).toEqual(true);  
+  });
+
+  test("cashTendered = amountDue -> true", function() {
+    const ch = new ChangeHandler(15);
+    ch.insertCoin("dime");
+    ch.insertCoin("nickel");
+    let result = ch.isPaymentSufficient();
+    expect(result).toEqual(true);  
+  });
+
+  test("cashTendered < amountDue -> false", function() {
+    const ch = new ChangeHandler(100);
+    ch.insertCoin("dime");
+    ch.insertCoin("quarter");
+    let result = ch.isPaymentSufficient();
+    expect(result).toEqual(false);  
+  });
+
+
 
   
   
