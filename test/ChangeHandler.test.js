@@ -95,6 +95,41 @@ describe("ChangeHandler", function() {
     expect(result).toEqual(false);  
   });
 
+  //GIVE CHANGE
+  test("32 -> 1 quarter,1 nickel, 1 penny", function() {
+    const ch = new ChangeHandler(4);
+    ch.insertCoin("quarter");
+    ch.insertCoin("dime");
+    ch.insertCoin("penny");
+    let result = ch.giveChange();
+    expect(result).toEqual({quarters: 1, dimes: 0, nickels: 1, pennies: 2});  
+  });
+
+  test("10 change", function() {
+    const ch = new ChangeHandler(15);
+    ch.insertCoin("quarter");
+    let result = ch.giveChange();
+    expect(result).toEqual({quarters: 0, dimes: 1, nickels: 0, pennies: 0});  
+  });
+
+  test("27 change", function() {
+    const ch = new ChangeHandler(23);
+    ch.insertCoin("quarter");
+    ch.insertCoin("quarter");
+    let result = ch.giveChange();
+    expect(result).toEqual({quarters: 1, dimes: 0, nickels: 0, pennies: 2});  
+  });
+
+  test("68 change", function() {
+    const ch = new ChangeHandler(7);
+    ch.insertCoin("quarter");
+    ch.insertCoin("quarter");
+    ch.insertCoin("quarter");
+    let result = ch.giveChange();
+    expect(result).toEqual({quarters: 2, dimes: 1, nickels: 1, pennies: 3});  
+  });
+
+
 
 
   

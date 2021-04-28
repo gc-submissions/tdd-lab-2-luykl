@@ -38,12 +38,16 @@ class ChangeHandler {
     }
 
     giveChange() {
-        // TODO return the correct change in the following format...
+      let totalChange = this.cashTendered - this.amountDue;
+      let quartersChange = Math.floor( totalChange / 25 );
+      let dimesChange = Math.floor( (totalChange - quartersChange * 25) / 10 );
+      let nickelsChange = Math.floor( (totalChange - quartersChange * 25 - dimesChange * 10) / 5 );
+      let penniesChange = Math.floor(totalChange - quartersChange * 25 - dimesChange * 10 - nickelsChange * 5);
         return {
-            quarters: 0,
-            dimes: 0,
-            nickels: 0,
-            pennies: 0
+            quarters: quartersChange,
+            dimes: dimesChange,
+            nickels: nickelsChange,
+            pennies: penniesChange
         }
     }
 }
