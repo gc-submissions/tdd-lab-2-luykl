@@ -6,8 +6,8 @@
 class ChangeHandler {
     
     constructor(amountDue) {
-        this.amountDue = null;
-        this.cashTendered = null;
+        this.amountDue = amountDue;
+        this.cashTendered = 0;
     }
 
     /**
@@ -15,23 +15,39 @@ class ChangeHandler {
      * @param {string} type either quarter, dime, nickel, or penny
      */
     insertCoin(type) {
-      // TODO
+      if ( type === "quarter") {
+        this.cashTendered += 25;
+      } else if (type === "dime") {
+        this.cashTendered += 10;
+      } else if (type === "nickel") {
+        this.cashTendered += 5;
+      } else if (type === "penny") {
+        this.cashTendered += 1;
+      }
     }
 
     /**
      * Returns true if enough coins have been inserted to at least meet the amountDue
      */
     isPaymentSufficient() {
-      // TODO
+      if (this.cashTendered >= this.amountDue) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     giveChange() {
-        // TODO return the correct change in the following format...
+      let totalChange = this.cashTendered - this.amountDue;
+      let quartersChange = Math.floor( totalChange / 25 );
+      let dimesChange = Math.floor( (totalChange - quartersChange * 25) / 10 );
+      let nickelsChange = Math.floor( (totalChange - quartersChange * 25 - dimesChange * 10) / 5 );
+      let penniesChange = Math.floor(totalChange - quartersChange * 25 - dimesChange * 10 - nickelsChange * 5);
         return {
-            quarters: 0,
-            dimes: 0,
-            nickels: 0,
-            pennies: 0
+            quarters: quartersChange,
+            dimes: dimesChange,
+            nickels: nickelsChange,
+            pennies: penniesChange
         }
     }
 }
